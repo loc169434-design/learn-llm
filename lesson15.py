@@ -99,7 +99,7 @@ def build_llm_prompt(req: AskRequest) -> PromptPreviewResponse:
         "Bạn là chuyên gia phân tích dữ liệu Fintech. "
         "Chỉ được trả lời dựa trên số liệu JSON được cung cấp, không tự bịa thêm số."
     )
-    report_json = json.dump(report.model_dump(),ensure_ascii=False, indent=2)
+    report_json = json.dumps(report.model_dump(),ensure_ascii=False, indent=2)
     user_prompt = f"Dữ liệu doanh thu:\n{report_json}\n\nCâu hỏi: {req.question}"
     return PromptPreviewResponse(
         system_prompt=system_prompt,
