@@ -3,54 +3,54 @@
 ## 1. Mục tiêu cá nhân
 - **Hồ sơ:** Mobile Developer (Android / Kotlin) kinh nghiệm 3-5 năm, nghiệp vụ Fintech / Ngân hàng.
 - **Mục tiêu:** Chuyển hướng sang Mobile + AI Engineer / Backend AI (Target lương: 28 - 33 triệu).
-- **Chiến lược:** Vừa học vừa xây dựng project GitHub có source code chạy được, có test tự động và README chuẩn chỉ làm bằng chứng năng lực.
+- **Chiến lược:** Vừa học vừa xây dựng project thực chiến (Backend AI + App Android Automation ô tô `DriveSafeAI`), có test tự động, sổ tay phỏng vấn và sync qua Git để học liền mạch giữa máy công ty và máy ở nhà.
 
 ---
 
-## 2. Tiến độ hiện tại
+## 2. Tiến độ hiện tại (Cập nhật: 20/11/2026)
 
-### ✅ Đã hoàn thành (Tuần 1 - Tuần 2)
-- **Bài 1 - 4:** Python cơ bản, biến, hàm, vòng lặp, tính tuổi trung bình, gom nhóm theo city, viết test logic.
-- **Bài 5 - 8:** Xử lý file JSON (`users.json`), type hints, Pydantic `BaseModel`.
-- **Bài 9 - 11:** HTTP client (`requests`, `httpx`), gọi API bên thứ ba.
-- **Bài 12: REST API đầu tiên với FastAPI**
-  - Đã xong file `main.py`:
-    - `GET /users` (hỗ trợ query param `city: Optional[str]`).
-    - `GET /users/{user_id}` (path param, ném `HTTPException(404)`).
-    - `POST /users` (nhận body Pydantic model, status 201, tự động validate lỗi 422).
-    - `GET /stats` (thống kê tổng user, tuổi trung bình, gom nhóm `cities`).
-    - `DELETE /users/{user_id}` (xóa user khỏi list bằng `.pop()`, xử lý 404).
-  - Đã xong file `test_main.py` dùng `TestClient` (FastAPI + httpx + pytest): **7/7 test cases PASS 100%**.
+### ✅ Đã hoàn thành
+- **Bài 1 – 12:** Python cơ bản, JSON, Pydantic, HTTP Client, FastAPI CRUD + `pytest` (`main.py`, `test_main.py` — 8/8 pass).
+- **Bài 13 – 14:** Pandas phân tích, làm sạch dữ liệu, `pd.merge` và `groupby().agg()` (`lesson13.py`, `lesson14.py`).
+- **Bài 15:** Nối Pandas vào FastAPI & đóng gói JSON Prompt (`lesson15.py`).
+- **Bài 16:** Gọi Google Gemini API (`google-genai`, `gemini-flash-lite-latest`) + bảo mật `.env` (`lesson16.py`).
+- **Bài 17:** Structured Output (`response_schema` + Pydantic `CarCommandPlan`) cho Android Car Co-Pilot (`lesson17.py`).
+- **Bài 18:** Streaming Server-Sent Events (`text/event-stream`) & `AsyncIterator` + `yield` (`lesson18.py`).
+- **Bài 19:** Function Calling / Tool Use (`client.chats.create` + Pandas tools `add_car_expense`, `get_expense_summary`) (`lesson19.py`).
+- **Bài 20:** Embeddings (`gemini-embedding-001`, 3072 chiều) & Semantic Search bằng Cosine Similarity (`lesson20.py`).
+- **Dự án thực chiến `DriveSafeAI` (`~/AndroidStudioProjects/DriveSafeAI` + `backend/`):**
+  - **Module 1 (Backend AI):** Hoàn thiện `backend/` (`triage` & `compose-reply`) + `pytest` mock Gemini (5/5 pass).
+  - **Module 2 (Android Notification Collector):** `CarNotificationListenerService` + `NotificationBatchDebouncer` (4s, `Mutex`, test bằng VirtualTime) + MVI Dashboard.
+  - **Module 3 (Silent Reply & Audio Ducking):** `CarSpeechSpeaker` (`AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK`), `CarVoiceRecognizer` (`vi-VN`), `SilentReplySender` (`RemoteInput` + `PendingIntent` IPC).
+  - Tài liệu phỏng vấn chi tiết: [docs/INTERVIEW_PLAYBOOK.md](docs/INTERVIEW_PLAYBOOK.md).
 
 ---
 
-### ⏳ Đang làm (Tuần 3: Xử lý dữ liệu với Pandas)
-- **Bài 13: pandas cơ bản**
-  - File đang viết: `lesson13.py` (đã có khung đọc file `users.json`, `df.shape`, `mean()`, filter `df[df["age"] > 25]`, `value_counts()`, `groupby()`).
-  - **Bài tập tiếp theo cần làm:**
-    1. Chạy `lesson13.py` kiểm tra kết quả in ra.
-    2. Viết filter kết hợp điều kiện: Tìm người ở "HCM" và có tuổi > 20: `df[(df["city"] == "HCM") & (df["age"] > 20)]`.
-    3. Tạo cột mới `age_group` ("under_25" / "25_plus") bằng `.apply()` hoặc lambda, sau đó đếm số lượng mỗi nhóm bằng `value_counts()`.
-    4. Xuất bảng ra file CSV: `df.to_csv("report.csv", index=False)`.
-    5. Xử lý dữ liệu khuyết tật (Missing data / NaN): thử `df.dropna()` và `df["age"].fillna(0)`.
+### ⏳ Đang làm (Bài 21: Chunking & Full RAG Pipeline)
+- **File đang mở:** `lesson21.py` (khung sẵn 3 `# TODO`):
+  1. `chunk_text(text, chunk_size=260, overlap=50)`: Cắt văn bản sổ tay xe có phần gối đầu.
+  2. `retrieve_relevant_chunks(...)`: Tìm top-k đoạn liên quan nhất và lọc ngưỡng `min_score = 0.55` chống bịa đặt.
+  3. `ask_rag(...)`: Ghép context `[Đoạn #...]` và gọi Gemini trả lời kèm trích dẫn nguồn.
+- **Kế tiếp sau Bài 21:**
+  - **Bài 22–23:** Vector DB + Đánh giá & Guardrails cho RAG.
+  - **Bài 24–25 / Module 4–5:** Dockerize Backend + nối Retrofit từ App `DriveSafeAI` vào Backend thật + `BluetoothCarReceiver` tự động bật khi lên xe.
 
 ---
 
 ## 3. Bản đồ đối chiếu kiến thức (Android Kotlin vs Python AI)
 
-| Android (Kotlin) | FastAPI / Python | Ghi chú |
+| Android (Kotlin) | FastAPI / Python AI | Ghi chú |
 | :--- | :--- | :--- |
-| `data class User(...)` | `class User(BaseModel):` (Pydantic) | Tự validate kiểu dữ liệu, sai trả về 422 |
-| Retrofit `@GET("users/{id}")` | `@app.get("/users/{user_id}")` | Path parameter |
-| Retrofit `@Query("city")` | `def list_users(city: Optional[str] = None)` | Query parameter |
-| `String?` | `Optional[str]` (Python 3.9) hoặc `str \| None` (Python 3.10+) | Kiểu có thể null |
-| `users.filter { ... }` | `df[df["age"] > 25]` (pandas) | Lọc dữ liệu cực nhanh |
-| `users.groupBy { ... }` | `df.groupby("city")["age"].mean()` | Gom nhóm tính toán |
-| `MockWebServer` | `TestClient(app)` (fastapi.testclient) | Test API không cần bật uvicorn |
-| `androidTest / test` | `pytest test_main.py` | Chạy bộ test tự động |
+| `data class User(...)` | `class User(BaseModel):` (Pydantic) | Validate & ép JSON Schema cho Structured Output |
+| `suspend fun` + `Flow<String>` + `emit` | `async def` + `AsyncIterator` + `yield` | Stream SSE từng chunk theo thời gian thực |
+| `users.filter { ... }` / `groupBy` | `df[df["age"] > 25]` / `df.groupby(...)` | Xử lý & tổng hợp dữ liệu bằng Pandas |
+| `MockWebServer` / Fake Repo | `app.dependency_overrides` + Mock | Test API LLM nhanh không tốn tiền quota |
+| `NotificationListenerService` | `CarNotificationListenerService` | System-bound service bắt thông báo Zalo/SMS |
+| `RemoteInput` + `PendingIntent` | `SilentReplySender` | Trả lời ngầm qua Binder IPC không che bản đồ |
 
 ---
 
-## 4. Prompt dán vào máy mới để tiếp tục ngay lập tức
-
-> *"Mình là Android Dev đang học chuyển hướng sang Mobile + AI. Mình đã hoàn thành xong Bài 12 (FastAPI CRUD + TestClient 7/7 test pass trong main.py và test_main.py). Hiện tại mình đang ở Bài 13: Xử lý dữ liệu với Pandas (file lesson13.py). Hãy tiếp tục hướng dẫn mình làm tiếp các bài tập của Bài 13 nhé!"*
+## 4. Cách bật lại ở máy tính khác (Về nhà mở Antigravity)
+1. Chạy `git pull` (hoặc `git clone`) repo `learn-llm`, chạy `uv sync` và copy `.env` chứa `GEMINI_API_KEY`.
+2. Mở thư mục `learn-llm` bằng **Antigravity** (Workspace Skill `.agents/skills/daily-study-tutor/SKILL.md` tự động được nhận diện).
+3. Chỉ cần nhắn **"ôn bài"** hoặc **"học tiếp"** — Antigravity sẽ tự đọc file này và bật widget bài tập tương tác + hướng dẫn tiếp từ `lesson21.py`!
