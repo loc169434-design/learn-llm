@@ -42,7 +42,23 @@ def chunk_text(text: str, chunk_size: int = 260, overlap: int = 50) -> list[str]
          start += step
     4. return chunks
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 1")
+    clean_text = " ".join(text.split())
+    if not clean_text:
+        return []
+
+    step = chunk_size - overlap
+    if step <= 0:
+        raise ValueError("Chunk size phải lớn hơn overlap")
+    chunks: list[str] = []
+    start = 0
+    while start < len(clean_text):
+        chunk = clean_text[start: start + chunk_size]
+        chunks.append(chunk)
+
+        if start + chunk_size >= len(clean_text):
+            break
+        start += step
+    return chunks
 
 
 def retrieve_relevant_chunks(
@@ -52,17 +68,21 @@ def retrieve_relevant_chunks(
     top_k: int = 2,
     min_score: float = 0.55,
 ) -> list[dict]:
-    """
-    TODO 2: Tìm `top_k` đoạn giống `query` nhất và CHỈ GIỮ các đoạn có score >= min_score.
-
-    Gợi ý:
-    1. query_vec = embed_texts([query])[0]
-    2. Duyệt idx, (chunk, vec) bằng enumerate(zip(chunks, chunk_vectors)):
-       Tính score = cosine_similarity(query_vec, vec).
-       Nếu score >= min_score -> thêm {"chunk_id": idx + 1, "score": round(score, 4), "text": chunk}
-    3. Sắp xếp giảm dần theo score và trả về [:top_k]
-    """
-    raise NotImplementedError("Hãy hoàn thiện TODO 2")
+    # 1. Biến câu hỏi thành vector số (tái sử dụng hàm bạn đã viết ở Bài 20)
+    query_vec = embed_texts([query])[0]
+    # 2. Đo độ giống nhau với từng đoạn sổ tay, CHỈ GIỮ đoạn có điểm >= 0.55
+    matched: list[dict] = []
+    for idx, (chunk, vec) in enumerate(zip(chunks, chunk_vectors)):
+        score = cosine_similarity(query_vec, vec)
+        if score >= min_score:
+            matched.append({
+                "chunk_id": idx + 1,  # Đánh số từ 1 thay vì 0 để hiển thị [Đoạn #1] tự nhiên hơn
+                "score": round(score, 4),
+                "text": chunk,
+            })
+    # 3. Sắp xếp điểm giảm dần (giống sortedByDescending { it.score }) và lấy top_k đoạn đầu
+    matched.sort(key=lambda item: item["score"], reverse=True)
+    return matched[:top_k]
 
 
 def ask_rag(
@@ -70,20 +90,36 @@ def ask_rag(
     chunks: list[str],
     chunk_vectors: list[np.ndarray],
 ) -> dict:
-    """
-    TODO 3: Hoàn thiện luồng RAG (Retrieve -> Augment -> Generate).
-
-    Gợi ý:
-    1. Retrieve: matches = retrieve_relevant_chunks(question, chunks, chunk_vectors)
-    2. Guardrail chống bịa: nếu matches rỗng -> return ngay:
-       {"answer": "Xin lỗi, sổ tay xe hiện không có thông tin về vấn đề này.", "sources": []}
-    3. Augment: Ghép context:
-       context = "\\n\\n".join(f"[Đoạn #{m['chunk_id']}] {m['text']}" for m in matches)
-    4. Generate: Gọi Gemini với system_instruction:
-       "Bạn là trợ lý sổ tay xe. Chỉ trả lời dựa trên [Đoạn #...] được cung cấp và ghi rõ trích dẫn [Đoạn #...] ở cuối câu."
-    5. return {"answer": response.text or "", "sources": matches}
-    """
-    raise NotImplementedError("Hãy hoàn thiện TODO 3")
+    # BƯỚC 1 (Retrieve): Đi tìm các đoạn sách liên quan tới câu hỏi
+    matches = retrieve_relevant_chunks(question, chunks, chunk_vectors)
+    # BƯỚC 2 (Guardrail): Không có đoạn nào đạt 0.55 điểm -> Câu hỏi ngoài lề -> Từ chối ngay!
+    if not matches:
+        return {
+            "answer": "Xin lỗi, sổ tay xe hiện không có thông tin về vấn đề này.",
+            "sources": [],
+        }
+    # BƯỚC 3 (Augment): Ghép các đoạn tìm được thành văn bản tham khảo có đánh dấu [Đoạn #...]
+    context = "\n\n".join(f"[Đoạn #{m['chunk_id']}] {m['text']}" for m in matches)
+    user_prompt = f"Tài liệu sổ tay xe:\n{context}\n\nCâu hỏi: {question}"
+    # BƯỚC 4 (Generate): Đưa tài liệu + câu hỏi cho Gemini đọc và tổng hợp câu trả lời
+    if not os.getenv("GEMINI_API_KEY"):
+        raise ValueError("Chưa cấu hình GEMINI_API_KEY trong file .env")
+    client = genai.Client()
+    response = client.models.generate_content(
+        model=CHAT_MODEL,
+        contents=user_prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=(
+                "Bạn là trợ lý sổ tay xe. Chỉ trả lời dựa trên [Đoạn #...] được cung cấp "
+                "và ghi rõ trích dẫn [Đoạn #...] ở cuối câu."
+            ),
+            temperature=0.1,  # Giữ nhiệt độ thấp để AI trả lời sát từng chữ trong sách
+        ),
+    )
+    return {
+        "answer": response.text or "",
+        "sources": matches,
+    }
 
 
 if __name__ == "__main__":

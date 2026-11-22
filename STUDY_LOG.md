@@ -18,6 +18,7 @@
 - **Bài 18:** Streaming Server-Sent Events (`text/event-stream`) & `AsyncIterator` + `yield` (`lesson18.py`).
 - **Bài 19:** Function Calling / Tool Use (`client.chats.create` + Pandas tools `add_car_expense`, `get_expense_summary`) (`lesson19.py`).
 - **Bài 20:** Embeddings (`gemini-embedding-001`, 3072 chiều) & Semantic Search bằng Cosine Similarity (`lesson20.py`).
+- **Bài 21:** Chunking có gối đầu (`overlap`) & Full RAG Pipeline (`lesson21.py` — lọc ngưỡng `min_score=0.55`, trích dẫn `[Đoạn #...]`, chặn đứng câu hỏi ngoài lề `NGUỒN: []`).
 - **Dự án thực chiến `DriveSafeAI` (`~/AndroidStudioProjects/DriveSafeAI` + `backend/`):**
   - **Module 1 (Backend AI):** Hoàn thiện `backend/` (`triage` & `compose-reply`) + `pytest` mock Gemini (5/5 pass).
   - **Module 2 (Android Notification Collector):** `CarNotificationListenerService` + `NotificationBatchDebouncer` (4s, `Mutex`, test bằng VirtualTime) + MVI Dashboard.
@@ -26,14 +27,15 @@
 
 ---
 
-### ⏳ Đang làm (Bài 21: Chunking & Full RAG Pipeline)
-- **File đang mở:** `lesson21.py` (khung sẵn 3 `# TODO`):
-  1. `chunk_text(text, chunk_size=260, overlap=50)`: Cắt văn bản sổ tay xe có phần gối đầu.
-  2. `retrieve_relevant_chunks(...)`: Tìm top-k đoạn liên quan nhất và lọc ngưỡng `min_score = 0.55` chống bịa đặt.
-  3. `ask_rag(...)`: Ghép context `[Đoạn #...]` và gọi Gemini trả lời kèm trích dẫn nguồn.
-- **Kế tiếp sau Bài 21:**
-  - **Bài 22–23:** Vector DB + Đánh giá & Guardrails cho RAG.
-  - **Bài 24–25 / Module 4–5:** Dockerize Backend + nối Retrofit từ App `DriveSafeAI` vào Backend thật + `BluetoothCarReceiver` tự động bật khi lên xe.
+### ⏳ Đang làm (Cập nhật: 21/11/2026)
+1. **Phòng thí nghiệm Tự Train AI & Nghiên cứu trình TS. Bùi Thanh Hùng (`ai_research_lab/` + `research_thay_hung/`):**
+   - Đã tổng hợp toàn bộ công trình nghiên cứu của thầy trong [research_thay_hung/README.md](research_thay_hung/README.md).
+   - **Lộ trình 14 ngày hiểu bản chất lý thuyết & tự train model:** Theo dõi tại [ai_research_lab/PROGRESS_TRACKER.md](ai_research_lab/PROGRESS_TRACKER.md).
+   - **Đang mở Ngày 01 (`ai_research_lab/day01_tfidf_and_vn_text/`):**
+     - Đọc lý thuyết gốc: `THEORY_DAY01.md` (Vector hóa ngôn ngữ, chuẩn hóa tiếng Việt không dấu/viết tắt, bản chất công thức `TF`, `IDF`, `TF-IDF`).
+     - Code thực hành 3 `# TODO`: `lab01_tfidf_from_scratch.py` trên bộ dữ liệu 48 tin nhắn thực tế `ai_research_lab/data/vn_messages.csv`.
+2. **Kế tiếp lộ trình GenAI & `DriveSafeAI`:**
+   - **Bài 22:** Lưu vector vào Vector DB cục bộ + Đánh giá & Guardrails cho RAG (và nối thẳng sang `DriveSafeAI`).
 
 ---
 
