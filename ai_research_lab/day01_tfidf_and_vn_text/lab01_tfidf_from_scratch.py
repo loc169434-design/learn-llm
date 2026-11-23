@@ -46,8 +46,16 @@ def normalize_vn_message(text: str) -> list[str]:
        - Ngược lại giữ nguyên `[w]`.
     5. Lọc bỏ các từ nằm trong tập `VN_STOPWORDS` và trả về `list[str]`.
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 1 dựa theo hướng dẫn phía trên")
-
+    expanded: list[str] = []
+    text = text.lower()
+    clean_text = re.sub(r"[^\w\s]", " ", text)
+    list_text = clean_text.split()
+    for word in list_text:
+        if word in VN_ABBREVIATIONS:
+            expanded.extend(VN_ABBREVIATIONS[word].split())
+        else:
+            expanded.append(word)
+    return [w for w in expanded if w not in VN_STOPWORDS]
 
 def compute_tf(tokens: list[str]) -> dict[str, float]:
     """
@@ -57,7 +65,15 @@ def compute_tf(tokens: list[str]) -> dict[str, float]:
     - Nếu `tokens` rỗng -> trả về `{}`.
     - Gợi ý: Dùng `Counter(tokens)` để đếm nhanh số lần xuất hiện của mỗi từ.
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 2")
+    if not tokens:
+        return {}
+    total = len(tokens)
+    counts = Counter(tokens)
+    tf_map: dict[str, float] = {}
+    for word, count in counts.items():
+        tf_map[word] = count / total
+    return tf_map
+
 
 
 def compute_idf(tokenized_docs: list[list[str]], vocab: list[str]) -> dict[str, float]:
@@ -72,7 +88,22 @@ def compute_idf(tokenized_docs: list[list[str]], vocab: list[str]) -> dict[str, 
     - `df_t`: Số lượng tin nhắn có chứa từ `t` (lưu ý: trong 1 tin nhắn dù từ `t` lặp lại 3 lần
       thì cũng chỉ tính là 1 tin nhắn có chứa nó -> dùng `set(doc)` khi kiểm tra!).
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 3")
+    n = len(tokenized_docs)
+    print(f"Số llượng từ n:" ,n)
+    doc_sets: list[set[str]] = []
+    for doc in tokenized_docs:
+        doc_sets.append(set(doc))
+    idf_map: dict[str, float] = {}
+
+    for word in vocab:
+        df_t = 0
+        for doc_set in doc_sets:
+            if word in doc_set:
+                df_t += 1
+        idf_map[word] = math.log((n + 1) / (df_t + 1)) + 1.0
+
+    return idf_map
+
 
 
 def build_tfidf_matrix(texts: list[str]) -> tuple[np.ndarray, list[str], dict[str, float]]:

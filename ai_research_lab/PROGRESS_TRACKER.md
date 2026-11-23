@@ -5,8 +5,8 @@ Cập nhật file này mỗi khi hoàn thành 1 ngày để giữ mạch kiến 
 ---
 
 ## Trạng Thái Hiện Tại
-- **Ngày đang học:** `Ngày 01 — day01_tfidf_and_vn_text` (✅ Đã học xong Lý thuyết Tiết 1 + Tiết 2 & Trắc nghiệm 12 câu; ⏳ Bước kế tiếp: Tự code 3 `# TODO` trong `lab01_tfidf_from_scratch.py` theo quy tắc 15 phút tự lực).
-- **Mục tiêu kế tiếp:** Chạy pass `lab01_tfidf_from_scratch.py`, ghi lại kết quả thực nghiệm rồi sang Ngày 02 (tự train 3 model ML đầu tiên).
+- **Ngày đang học:** `Ngày 02 — day02_ml_classifiers_and_metrics` (✅ Đã học xong Lý thuyết Tiết 1 + Tiết 2 trong `THEORY_DAY02.md` & Trắc nghiệm 12 câu; ⏳ Bước kế tiếp: Ôn nhanh đầu buổi → Cài `scikit-learn` & tự code `lab02_ml_classifiers.py` theo quy tắc 15 phút tự lực).
+- **Mục tiêu kế tiếp:** Tự train & đo `Confusion Matrix / Precision / Recall / Macro-F1` cho 3 model (`Logistic Regression`, `SVM`, `Random Forest`) trên `vn_messages.csv` rồi sang Ngày 03 (`Cross-Entropy Loss & Gradient Descent`).
 
 ---
 
@@ -14,8 +14,8 @@ Cập nhật file này mỗi khi hoàn thành 1 ngày để giữ mạch kiến 
 
 | Ngày | Chủ đề & Thư mục | Bản chất lý thuyết cần nắm vững | Trạng thái Code | Kết quả thực nghiệm ghi nhận |
 | :--- | :--- | :--- | :---: | :--- |
-| **Day 01** | `day01_tfidf_and_vn_text` | Tokenization, chuẩn hóa không dấu/viết tắt, công thức gốc `TF`, `IDF`, `TF-IDF` & `Cosine Similarity` | ⏳ Đang làm | *(Ghi sau khi chạy pass `lab01`)* |
-| **Day 02** | `day02_ml_classifiers_and_metrics` | Decision Boundary, Overfitting/Underfitting, Precision / Recall / F1-Score / Confusion Matrix | ⬜ Chưa mở | — |
+| **Day 01** | `day01_tfidf_and_vn_text` | Tokenization, chuẩn hóa không dấu/viết tắt, công thức gốc `TF`, `IDF`, `TF-IDF` & `Cosine Similarity` | ✅ Hoàn thành | Ma trận TF-IDF `48 x 484`; Twin Search câu không dấu *"anh oi con sot cao dua di bv cap cuu gap"* khớp Top-3 đều `[URGENT]` (Top-1 `score=0.709`). Phát hiện nhiễu IDF từ không dấu chưa chuẩn hóa (`'di'`: `3.7932`). |
+| **Day 02** | `day02_ml_classifiers_and_metrics` | Decision Boundary, Overfitting/Underfitting, Precision / Recall / F1-Score / Confusion Matrix | ⏳ Đang làm | *(Đã xong Lý thuyết Tiết 1 + Tiết 2; kế tiếp code `lab02`)* |
 | **Day 03** | `day03_loss_and_gradient_descent` | Hàm mất mát `Cross-Entropy Loss`, đạo hàm & `Gradient Descent`, vai trò của `Learning Rate` | ⬜ Chưa mở | — |
 | **Day 04** | `day04_pytorch_mlp_and_backprop` | PyTorch Tensor, hàm phi tuyến `ReLU`/`GELU`, `Backpropagation` trên GPU Apple Silicon (`mps`) | ⬜ Chưa mở | — |
 | **Day 05** | `day05_bigru_and_self_attention` | Thứ tự chuỗi trong `Bi-GRU`, công thức trọng số `Self-Attention` ($\alpha_i$) giải thích từ khóa | ⬜ Chưa mở | — |

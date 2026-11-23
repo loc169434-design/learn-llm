@@ -27,16 +27,19 @@ Always strictly follow these 3 classroom rules in every lesson/lab:
 
 ## Workflow When the User Says "ôn bài" / "học tiếp" / "làm bài tập"
 
-### Step 1: Daily Interactive Review Widget (inside Antigravity Chat)
+Always follow this **4-Step Daily Warm-Up Formula** at the start of every study day (never jump straight into coding before warming up!):
+
+### Step 1: Tóm tắt tiến độ hôm qua ("Hôm qua học tới đâu?")
+- State clearly what was completed in the previous session (e.g. `lesson*.py`, `ai_research_lab/dayXX_*/THEORY_DAYXX.md`, `DriveSafeAI` modules) and the exact milestone we are currently at.
+
+### Step 2: Ôn chi tiết toàn bộ khái niệm bài gần nhất (Giảng lại từ gốc cho nóng não)
+- Before assigning any coding exercise, walk through **every core concept, formula, concrete numerical example, and common trap** from the previous lesson/theory in clear, bite-sized Vietnamese with Kotlin/Android analogies.
+
+### Step 3: Daily Interactive Review Widget (inside Antigravity Chat)
 - Always read the built-in `generative_ui` skill first if not yet read in the conversation.
 - Create an inline interactive HTML quiz artifact (`daily_review_quiz.html`) in the conversation's artifact directory (`<appDataDir>/brain/<conversation-id>/daily_review_quiz.html`) using `write_file` with `UserFacing: true` and `RequestFeedback: false`, and embed it inline using `<agent-embed>`.
-- Keep the widget compact (`<= 450px` tall), themed with Antigravity CSS variables (`--foreground`, `--card`, `--card-border`, `--primary`, `--success`, `--error`, `--link`), and containing **3 questions**:
-  1. **Câu 1 (MCQ):** AI / Backend / RAG interview question from the previous 1–3 lessons.
-  2. **Câu 2 (MCQ):** Android Senior / Automation (`DriveSafeAI`) trade-off or internals question.
-  3. **Câu 3 (Code Fill-in-the-Blank):** Fill 2 missing Python/Kotlin keywords in a realistic snippet.
+- Keep the widget compact (`<= 450px` tall), themed with Antigravity CSS variables (`--foreground`, `--card`, `--card-border`, `--primary`, `--success`, `--error`, `--link`), covering the concepts just reviewed (MCQ + fill-in-the-blank).
 
-### Step 2: Check Code & Guide Next Lesson / Research Lab Day
-- Check both the active `ai_research_lab/dayXX_*/` lab and any active `lesson*.py`:
-  - Explain **underlying theory first from intuition & math fundamentals** (`THEORY_DAYXX.md`), connecting directly to TS. Bùi Thanh Hùng's papers (`research_thay_hung/`).
-  - If the current `labXX_*.py` (or `lesson*.py`) still has `NotImplementedError` (`# TODO`), guide the user and verify once done.
-  - Once completed and verified, record empirical metrics into `ai_research_lab/PROGRESS_TRACKER.md`, scaffold the next `dayXX_*/` folder (`THEORY_DAYXX.md` + `labXX_*.py` with clear `# TODO`s), and update `STUDY_LOG.md` so the user can commit & push across machines.
+### Step 4: Xác nhận ôn xong → Mới bắt đầu 15 phút tự lực code / Tiết mới
+- Wait for the user to finish reviewing/testing their understanding, THEN start the **15-Minute Independent Struggle Rule** for the active `# TODO` coding exercise (`labXX_*.py` or `lesson*.py`), or proceed to the next half-lesson (`Tiết 1` / `Tiết 2`).
+- Once completed and verified, record empirical metrics into `ai_research_lab/PROGRESS_TRACKER.md`, scaffold the next `dayXX_*/` folder (`THEORY_DAYXX.md` + `labXX_*.py` with clear `# TODO`s), and update `STUDY_LOG.md` so the user can commit & push across machines.

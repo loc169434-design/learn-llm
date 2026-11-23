@@ -27,13 +27,12 @@
 
 ---
 
-### ⏳ Đang làm (Cập nhật: 21/11/2026)
+### ⏳ Đang làm (Cập nhật: 23/11/2026)
 1. **Phòng thí nghiệm Tự Train AI & Nghiên cứu trình TS. Bùi Thanh Hùng (`ai_research_lab/` + `research_thay_hung/`):**
    - Đã tổng hợp toàn bộ công trình nghiên cứu của thầy trong [research_thay_hung/README.md](research_thay_hung/README.md).
    - **Lộ trình 14 ngày hiểu bản chất lý thuyết & tự train model:** Theo dõi tại [ai_research_lab/PROGRESS_TRACKER.md](ai_research_lab/PROGRESS_TRACKER.md).
-   - **Đang mở Ngày 01 (`ai_research_lab/day01_tfidf_and_vn_text/`):**
-     - Đọc lý thuyết gốc: `THEORY_DAY01.md` (Vector hóa ngôn ngữ, chuẩn hóa tiếng Việt không dấu/viết tắt, bản chất công thức `TF`, `IDF`, `TF-IDF`).
-     - Code thực hành 3 `# TODO`: `lab01_tfidf_from_scratch.py` trên bộ dữ liệu 48 tin nhắn thực tế `ai_research_lab/data/vn_messages.csv`.
+   - **✅ Đã hoàn thành Ngày 01 (`day01_tfidf_and_vn_text`):** Pass 100% `lab01_tfidf_from_scratch.py` (ma trận TF-IDF `48 x 484`, Twin Search câu không dấu khớp Top-3 `[URGENT]`, Top-1 `score=0.709`).
+   - **⏳ Đang làm Ngày 02 (`day02_ml_classifiers_and_metrics`):** Đã hoàn thành Lý thuyết Tiết 1 + Tiết 2 ([THEORY_DAY02.md](ai_research_lab/day02_ml_classifiers_and_metrics/THEORY_DAY02.md)) & 12 câu trắc nghiệm; bước kế tiếp là ôn nhanh đầu buổi rồi tự code `lab02_ml_classifiers.py` (tự train & đo `Logistic Regression`, `SVM`, `Random Forest`).
 2. **Kế tiếp lộ trình GenAI & `DriveSafeAI`:**
    - **Bài 22:** Lưu vector vào Vector DB cục bộ + Đánh giá & Guardrails cho RAG (và nối thẳng sang `DriveSafeAI`).
 
