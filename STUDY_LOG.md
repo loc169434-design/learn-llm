@@ -19,6 +19,7 @@
 - **Bài 19:** Function Calling / Tool Use (`client.chats.create` + Pandas tools `add_car_expense`, `get_expense_summary`) (`lesson19.py`).
 - **Bài 20:** Embeddings (`gemini-embedding-001`, 3072 chiều) & Semantic Search bằng Cosine Similarity (`lesson20.py`).
 - **Bài 21:** Chunking có gối đầu (`overlap`) & Full RAG Pipeline (`lesson21.py` — lọc ngưỡng `min_score=0.55`, trích dẫn `[Đoạn #...]`, chặn đứng câu hỏi ngoài lề `NGUỒN: []`).
+- **Bài 22:** Local Vector Store (`.json` + `.npy` nhị phân, nạp lại `0 API calls`) & RAG Evaluation tự động (`lesson22.py` — đạt `4/5 (80%)`, phát hiện thực nghiệm ngưỡng `min_score=0.55` để lọt câu *"Giá Bitcoin"* qua tầng Retrieval nhưng bị lớp Guardrail thứ 2 ở Gemini Prompt chặn lại thành công!).
 - **Dự án thực chiến `DriveSafeAI` (`~/AndroidStudioProjects/DriveSafeAI` + `backend/`):**
   - **Module 1 (Backend AI):** Hoàn thiện `backend/` (`triage` & `compose-reply`) + `pytest` mock Gemini (5/5 pass).
   - **Module 2 (Android Notification Collector):** `CarNotificationListenerService` + `NotificationBatchDebouncer` (4s, `Mutex`, test bằng VirtualTime) + MVI Dashboard.
@@ -27,14 +28,15 @@
 
 ---
 
-### ⏳ Đang làm (Cập nhật: 23/11/2026)
+### ⏳ Đang làm (Cập nhật: 26/11/2026)
 1. **Phòng thí nghiệm Tự Train AI & Nghiên cứu trình TS. Bùi Thanh Hùng (`ai_research_lab/` + `research_thay_hung/`):**
    - Đã tổng hợp toàn bộ công trình nghiên cứu của thầy trong [research_thay_hung/README.md](research_thay_hung/README.md).
    - **Lộ trình 14 ngày hiểu bản chất lý thuyết & tự train model:** Theo dõi tại [ai_research_lab/PROGRESS_TRACKER.md](ai_research_lab/PROGRESS_TRACKER.md).
    - **✅ Đã hoàn thành Ngày 01 (`day01_tfidf_and_vn_text`):** Pass 100% `lab01_tfidf_from_scratch.py` (ma trận TF-IDF `48 x 484`, Twin Search câu không dấu khớp Top-3 `[URGENT]`, Top-1 `score=0.709`).
-   - **⏳ Đang làm Ngày 02 (`day02_ml_classifiers_and_metrics`):** Đã hoàn thành Lý thuyết Tiết 1 + Tiết 2 ([THEORY_DAY02.md](ai_research_lab/day02_ml_classifiers_and_metrics/THEORY_DAY02.md)) & 12 câu trắc nghiệm; bước kế tiếp là ôn nhanh đầu buổi rồi tự code `lab02_ml_classifiers.py` (tự train & đo `Logistic Regression`, `SVM`, `Random Forest`).
+   - **✅ Đã hoàn thành Ngày 02 (`day02_ml_classifiers_and_metrics`):** Pass 100% `lab02_ml_classifiers.py` — **Linear SVM vô địch** (`Test Acc=83.3%`, `Macro-F1=0.831`, `URGENT Recall=100%`), Logistic Regression (`Macro-F1=0.757`), Random Forest Overfitting (`Train 100% / Test 33.3%`).
+   - **⏳ Đang học Ngày 03 (`day03_loss_and_gradient_descent`):** Lý thuyết Tiết 1 (*Cross-Entropy Loss & Gradient Descent*).
 2. **Kế tiếp lộ trình GenAI & `DriveSafeAI`:**
-   - **Bài 22:** Lưu vector vào Vector DB cục bộ + Đánh giá & Guardrails cho RAG (và nối thẳng sang `DriveSafeAI`).
+   - **Bài 23–25 / Module 4:** Tinh chỉnh ngưỡng `min_score` RAG đạt `5/5`, nối Retrofit từ App `DriveSafeAI` vào Backend thật + `BluetoothCarReceiver` + Dockerize Backend.
 
 ---
 

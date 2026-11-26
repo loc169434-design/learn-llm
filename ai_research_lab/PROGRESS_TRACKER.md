@@ -5,8 +5,8 @@ Cập nhật file này mỗi khi hoàn thành 1 ngày để giữ mạch kiến 
 ---
 
 ## Trạng Thái Hiện Tại
-- **Ngày đang học:** `Ngày 02 — day02_ml_classifiers_and_metrics` (✅ Đã học xong Lý thuyết Tiết 1 + Tiết 2 trong `THEORY_DAY02.md` & Trắc nghiệm 12 câu; ⏳ Bước kế tiếp: Ôn nhanh đầu buổi → Cài `scikit-learn` & tự code `lab02_ml_classifiers.py` theo quy tắc 15 phút tự lực).
-- **Mục tiêu kế tiếp:** Tự train & đo `Confusion Matrix / Precision / Recall / Macro-F1` cho 3 model (`Logistic Regression`, `SVM`, `Random Forest`) trên `vn_messages.csv` rồi sang Ngày 03 (`Cross-Entropy Loss & Gradient Descent`).
+- **Ngày đã hoàn thành:** `Ngày 02 — day02_ml_classifiers_and_metrics` (✅ Đã xong Lý thuyết Tiết 1 + Tiết 2, Trắc nghiệm & pass 100% `lab02_ml_classifiers.py`).
+- **Đang học:** `Ngày 03 — day03_loss_and_gradient_descent` (Tiết 1 Lý thuyết: *Hàm mất mát `Cross-Entropy Loss` & Thuật toán hạ đồi `Gradient Descent`*) + **Bài 22 (`lesson22.py`)**: Local Vector Store & Đánh giá RAG.
 
 ---
 
@@ -15,8 +15,8 @@ Cập nhật file này mỗi khi hoàn thành 1 ngày để giữ mạch kiến 
 | Ngày | Chủ đề & Thư mục | Bản chất lý thuyết cần nắm vững | Trạng thái Code | Kết quả thực nghiệm ghi nhận |
 | :--- | :--- | :--- | :---: | :--- |
 | **Day 01** | `day01_tfidf_and_vn_text` | Tokenization, chuẩn hóa không dấu/viết tắt, công thức gốc `TF`, `IDF`, `TF-IDF` & `Cosine Similarity` | ✅ Hoàn thành | Ma trận TF-IDF `48 x 484`; Twin Search câu không dấu *"anh oi con sot cao dua di bv cap cuu gap"* khớp Top-3 đều `[URGENT]` (Top-1 `score=0.709`). Phát hiện nhiễu IDF từ không dấu chưa chuẩn hóa (`'di'`: `3.7932`). |
-| **Day 02** | `day02_ml_classifiers_and_metrics` | Decision Boundary, Overfitting/Underfitting, Precision / Recall / F1-Score / Confusion Matrix | ⏳ Đang làm | *(Đã xong Lý thuyết Tiết 1 + Tiết 2; kế tiếp code `lab02`)* |
-| **Day 03** | `day03_loss_and_gradient_descent` | Hàm mất mát `Cross-Entropy Loss`, đạo hàm & `Gradient Descent`, vai trò của `Learning Rate` | ⬜ Chưa mở | — |
+| **Day 02** | `day02_ml_classifiers_and_metrics` | Decision Boundary, Overfitting/Underfitting, Precision / Recall / F1-Score / Confusion Matrix | ✅ Hoàn thành | Split `36 Train / 12 Test` (`384` features, chống Data Leakage). **Linear SVM vô địch:** `Test Acc=83.3%`, `Macro-F1=0.831`, `URGENT Recall=100%` (`3/3`), đoán đúng `3/3` câu mới; Logistic Regression `Macro-F1=0.757`; Random Forest bị Overfitting nặng (`Train 100%` vs `Test 33.3%`, `URGENT Recall=0%`). |
+| **Day 03** | `day03_loss_and_gradient_descent` | Hàm mất mát `Cross-Entropy Loss`, đạo hàm & `Gradient Descent`, vai trò của `Learning Rate` | ⏳ Đang học Tiết 1 | *(Mở hộp đen bên trong `model.fit()`)* |
 | **Day 04** | `day04_pytorch_mlp_and_backprop` | PyTorch Tensor, hàm phi tuyến `ReLU`/`GELU`, `Backpropagation` trên GPU Apple Silicon (`mps`) | ⬜ Chưa mở | — |
 | **Day 05** | `day05_bigru_and_self_attention` | Thứ tự chuỗi trong `Bi-GRU`, công thức trọng số `Self-Attention` ($\alpha_i$) giải thích từ khóa | ⬜ Chưa mở | — |
 | **Day 06** | `day06_finetune_transformer_vn` | Cơ chế `Transformer` & `Transfer Learning`, tự Fine-tune model tiếng Việt | ⬜ Chưa mở | — |

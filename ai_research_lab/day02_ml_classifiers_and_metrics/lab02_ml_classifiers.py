@@ -21,10 +21,10 @@ LABEL_ORDER = ["URGENT", "BANKING", "NORMAL", "SPAM"]
 
 
 def prepare_train_test_vectors(
-    texts: list[str],
-    labels: list[str],
-    test_size: float = 0.25,
-    random_state: int = 42,
+        texts: list[str],
+        labels: list[str],
+        test_size: float = 0.25,
+        random_state: int = 42,
 ):
     """
     TODO 1: Chia tập Train / Test (Stratified) và vector hóa TF-IDF chống Data Leakage.
@@ -37,16 +37,27 @@ def prepare_train_test_vectors(
        còn tập Test CHỈ dùng `transform(X_test_text)`.
     4. Trả về tuple 5 phần tử: `(vectorizer, X_train, X_test, y_train, y_test)`.
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 1")
+    x_train_test, x_test_test, y_train, y_test = train_test_split(
+        texts,
+        labels,
+        test_size=test_size,
+        random_state=random_state,
+        stratify=labels,
+    )
+    vectorizer = TfidfVectorizer(tokenizer=normalize_vn_message, token_pattern=None)
+    x_train = vectorizer.fit_transform(x_train_test)
+    x_test = vectorizer.transform(x_test_test)
+    return vectorizer,x_train, x_test, y_train, y_test
+
 
 
 def train_and_evaluate_model(
-    model_name: str,
-    model,
-    X_train,
-    X_test,
-    y_train: list[str],
-    y_test: list[str],
+        model_name: str,
+        model,
+        X_train,
+        X_test,
+        y_train: list[str],
+        y_test: list[str],
 ) -> dict:
     """
     TODO 2: Huấn luyện 1 model ML và đo đủ 4 chỉ số đánh giá (phát hiện Overfitting + bỏ sót URGENT).
@@ -64,17 +75,35 @@ def train_and_evaluate_model(
     4. Trả về dict gồm các key:
        `"name"`, `"model"`, `"train_acc"`, `"test_acc"`, `"macro_f1"`, `"urgent_recall"`, `"cm"`.
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 2")
+    model.fit(X_train, y_train)
+    train_pred = model.predict(X_train)
+    test_pred = model.predict(X_test)
+    train_acc = accuracy_score(y_train, train_pred)
+    test_acc = accuracy_score(y_test, test_pred)
+    macro_f1 = float(f1_score(y_test, test_pred, average="macro", zero_division=0))
+    urgent_recall = float(recall_score(y_test, test_pred, labels=["URGENT"], average=None, zero_division=0)[0])
+    cm = confusion_matrix(y_test, test_pred,labels=LABEL_ORDER)
+    return {
+        "name": model_name,
+        "model": model,
+        "train_acc": train_acc,
+        "test_acc": test_acc,
+        "macro_f1": macro_f1,
+        "urgent_recall": urgent_recall,
+        "cm": cm,
+    }
 
 
 def compare_three_models(
-    X_train,
-    X_test,
-    y_train: list[str],
-    y_test: list[str],
+        X_train,
+        X_test,
+        y_train: list[str],
+        y_test: list[str],
 ) -> list[dict]:
     """
     TODO 3: Khởi tạo và chấm điểm song song 3 model kinh điển trong bài báo ML của thầy Hùng.
+
+
 
     3 model cần so sánh:
     1. ("Logistic Regression", LogisticRegression(max_iter=1000, random_state=42))
@@ -83,7 +112,16 @@ def compare_three_models(
 
     Duyệt qua 3 model, gọi `train_and_evaluate_model(...)` cho từng model và trả về `list[dict]`.
     """
-    raise NotImplementedError("Hãy hoàn thiện TODO 3")
+    candidates = [
+        ("Logistic Regression", LogisticRegression(max_iter=1000, random_state=42)),
+        ("Linear SVM", LinearSVC(random_state=42)),
+        ("Random Forest", RandomForestClassifier(n_estimators=100, random_state=42)),
+    ]
+    results: list[dict] = []
+    for name, model in candidates:
+        res = train_and_evaluate_model(name, model, X_train, X_test, y_train, y_test)
+        results.append(res)
+    return results
 
 
 if __name__ == "__main__":
