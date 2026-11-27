@@ -5,8 +5,8 @@ Cập nhật file này mỗi khi hoàn thành 1 ngày để giữ mạch kiến 
 ---
 
 ## Trạng Thái Hiện Tại
-- **Ngày đã hoàn thành:** `Ngày 02 — day02_ml_classifiers_and_metrics` (✅ Đã xong Lý thuyết Tiết 1 + Tiết 2, Trắc nghiệm & pass 100% `lab02_ml_classifiers.py`).
-- **Đang học:** `Ngày 03 — day03_loss_and_gradient_descent` (Tiết 1 Lý thuyết: *Hàm mất mát `Cross-Entropy Loss` & Thuật toán hạ đồi `Gradient Descent`*) + **Bài 22 (`lesson22.py`)**: Local Vector Store & Đánh giá RAG.
+- **Ngày đã hoàn thành:** `Ngày 02 — day02_ml_classifiers_and_metrics` (✅ Đã xong Lý thuyết Tiết 1 + Tiết 2, Trắc nghiệm & pass 100% `lab02_ml_classifiers.py`) + **Bài 22 (`lesson22.py`)** (✅ Pass Local Vector Store & RAG Eval `4/5 = 80%`).
+- **Đang làm (27/11/2026):** `Ngày 03 — day03_loss_and_gradient_descent` (✅ Đã xong Lý thuyết Tiết 1 + Tiết 2 & Trắc nghiệm; ⏳ Đang code bài tập 3 `# TODO` trong `lab03_gradient_descent_from_scratch.py`, đã thông `TODO 1` về `axis=1, keepdims=True`).
 
 ---
 
@@ -16,7 +16,7 @@ Cập nhật file này mỗi khi hoàn thành 1 ngày để giữ mạch kiến 
 | :--- | :--- | :--- | :---: | :--- |
 | **Day 01** | `day01_tfidf_and_vn_text` | Tokenization, chuẩn hóa không dấu/viết tắt, công thức gốc `TF`, `IDF`, `TF-IDF` & `Cosine Similarity` | ✅ Hoàn thành | Ma trận TF-IDF `48 x 484`; Twin Search câu không dấu *"anh oi con sot cao dua di bv cap cuu gap"* khớp Top-3 đều `[URGENT]` (Top-1 `score=0.709`). Phát hiện nhiễu IDF từ không dấu chưa chuẩn hóa (`'di'`: `3.7932`). |
 | **Day 02** | `day02_ml_classifiers_and_metrics` | Decision Boundary, Overfitting/Underfitting, Precision / Recall / F1-Score / Confusion Matrix | ✅ Hoàn thành | Split `36 Train / 12 Test` (`384` features, chống Data Leakage). **Linear SVM vô địch:** `Test Acc=83.3%`, `Macro-F1=0.831`, `URGENT Recall=100%` (`3/3`), đoán đúng `3/3` câu mới; Logistic Regression `Macro-F1=0.757`; Random Forest bị Overfitting nặng (`Train 100%` vs `Test 33.3%`, `URGENT Recall=0%`). |
-| **Day 03** | `day03_loss_and_gradient_descent` | Hàm mất mát `Cross-Entropy Loss`, đạo hàm & `Gradient Descent`, vai trò của `Learning Rate` | ⏳ Đang học Tiết 1 | *(Mở hộp đen bên trong `model.fit()`)* |
+| **Day 03** | `day03_loss_and_gradient_descent` | Hàm mất mát `Cross-Entropy Loss`, đạo hàm & `Gradient Descent`, vai trò của `Learning Rate` | ⏳ Đang code Lab (WIP) | Đã xong Lý thuyết Tiết 1 & Tiết 2 + Trắc nghiệm; đang làm 3 `# TODO` trong `lab03_gradient_descent_from_scratch.py` |
 | **Day 04** | `day04_pytorch_mlp_and_backprop` | PyTorch Tensor, hàm phi tuyến `ReLU`/`GELU`, `Backpropagation` trên GPU Apple Silicon (`mps`) | ⬜ Chưa mở | — |
 | **Day 05** | `day05_bigru_and_self_attention` | Thứ tự chuỗi trong `Bi-GRU`, công thức trọng số `Self-Attention` ($\alpha_i$) giải thích từ khóa | ⬜ Chưa mở | — |
 | **Day 06** | `day06_finetune_transformer_vn` | Cơ chế `Transformer` & `Transfer Learning`, tự Fine-tune model tiếng Việt | ⬜ Chưa mở | — |

@@ -7,7 +7,7 @@
 
 ---
 
-## 2. Tiến độ hiện tại (Cập nhật: 20/11/2026)
+## 2. Tiến độ hiện tại (Cập nhật: 27/11/2026)
 
 ### ✅ Đã hoàn thành
 - **Bài 1 – 12:** Python cơ bản, JSON, Pydantic, HTTP Client, FastAPI CRUD + `pytest` (`main.py`, `test_main.py` — 8/8 pass).
@@ -28,13 +28,13 @@
 
 ---
 
-### ⏳ Đang làm (Cập nhật: 26/11/2026)
+### ⏳ Đang làm (Cập nhật: 27/11/2026)
 1. **Phòng thí nghiệm Tự Train AI & Nghiên cứu trình TS. Bùi Thanh Hùng (`ai_research_lab/` + `research_thay_hung/`):**
    - Đã tổng hợp toàn bộ công trình nghiên cứu của thầy trong [research_thay_hung/README.md](research_thay_hung/README.md).
    - **Lộ trình 14 ngày hiểu bản chất lý thuyết & tự train model:** Theo dõi tại [ai_research_lab/PROGRESS_TRACKER.md](ai_research_lab/PROGRESS_TRACKER.md).
    - **✅ Đã hoàn thành Ngày 01 (`day01_tfidf_and_vn_text`):** Pass 100% `lab01_tfidf_from_scratch.py` (ma trận TF-IDF `48 x 484`, Twin Search câu không dấu khớp Top-3 `[URGENT]`, Top-1 `score=0.709`).
    - **✅ Đã hoàn thành Ngày 02 (`day02_ml_classifiers_and_metrics`):** Pass 100% `lab02_ml_classifiers.py` — **Linear SVM vô địch** (`Test Acc=83.3%`, `Macro-F1=0.831`, `URGENT Recall=100%`), Logistic Regression (`Macro-F1=0.757`), Random Forest Overfitting (`Train 100% / Test 33.3%`).
-   - **⏳ Đang học Ngày 03 (`day03_loss_and_gradient_descent`):** Lý thuyết Tiết 1 (*Cross-Entropy Loss & Gradient Descent*).
+   - **⏳ Đang làm bài tập Ngày 03 (`day03_loss_and_gradient_descent`):** Đã xong toàn bộ Lý thuyết Tiết 1 (*Cross-Entropy Loss*) + Tiết 2 (*Gradient Descent*, *Learning Rate*, *3 bước 1 Epoch*, *Softmax Numerical Stability*) & 2 bài Trắc nghiệm. Đang code dở 3 `# TODO` trong `lab03_gradient_descent_from_scratch.py` (đã giải thích chi tiết `axis=1, keepdims=True` cho `TODO 1`, kế tiếp hoàn thiện `TODO 1 -> TODO 3`).
 2. **Kế tiếp lộ trình GenAI & `DriveSafeAI`:**
    - **Bài 23–25 / Module 4:** Tinh chỉnh ngưỡng `min_score` RAG đạt `5/5`, nối Retrofit từ App `DriveSafeAI` vào Backend thật + `BluetoothCarReceiver` + Dockerize Backend.
 
@@ -56,4 +56,4 @@
 ## 4. Cách bật lại ở máy tính khác (Về nhà mở Antigravity)
 1. Chạy `git pull` (hoặc `git clone`) repo `learn-llm`, chạy `uv sync` và copy `.env` chứa `GEMINI_API_KEY`.
 2. Mở thư mục `learn-llm` bằng **Antigravity** (Workspace Skill `.agents/skills/daily-study-tutor/SKILL.md` tự động được nhận diện).
-3. Chỉ cần nhắn **"ôn bài"** hoặc **"học tiếp"** — Antigravity sẽ tự đọc file này và bật widget bài tập tương tác + hướng dẫn tiếp từ `lesson21.py`!
+3. Chỉ cần nhắn **"ôn bài"** hoặc **"học tiếp"** — Antigravity sẽ tự đọc file này và bật widget bài tập tương tác + hướng dẫn tiếp đúng điểm đang dừng gần nhất!

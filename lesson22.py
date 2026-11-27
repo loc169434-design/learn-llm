@@ -63,7 +63,6 @@ def save_vector_index(chunks: list[str], vectors: list[np.ndarray]) -> None:
     matrix = np.vstack(vectors)
     np.save(VECTORS_PATH, matrix)
 
-
 def load_or_build_vector_index(raw_text: str) -> tuple[list[str], list[np.ndarray]]:
     """
     TODO 2: Nạp Vector Index từ đĩa nếu đã có sẵn (Cache Hit); ngược lại mới gọi Gemini embed và lưu xuống đĩa.
